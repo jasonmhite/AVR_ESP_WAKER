@@ -75,9 +75,8 @@ int main() {
     // Set OUTPUT_PIN to output other pins are set to input
     DDRB = _BV(OUTPUT_PIN);
 
-    sbi(PORTB, INPUT_PIN); // Enable pullup on INPUT_PIN
-    sbi(PORTB, OUTPUT_PIN); // Set output pin to HIGH by default
-                            // ESP needs a LOW pulse to reset
+    // Set OUTPUT_PIN to high and enable internal pullups on INPUT_PIN
+    PORTB = _BV(OUTPUT_PIN) | _BV(INPUT_PIN);
 
     while(1) { sleep(); } // Wait until trigger
 
