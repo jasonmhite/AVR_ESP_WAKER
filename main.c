@@ -72,12 +72,10 @@ ISR(PCINT0_vect) {
 }
 
 int main() {
-    // Set OUTPUT_PIN to output, similar to arduino pinMode
+    // Set OUTPUT_PIN to output other pins are set to input
     DDRB = _BV(OUTPUT_PIN);
 
-    DDRB &= ~(1 << INPUT_PIN); // Set INPUT_PIN to input mode
-    PORTB |= (1 << INPUT_PIN); // Enable internal pullup on INPUT_PIN
-
+    sbi(PORTB, INPUT_PIN); // Enable pullup on INPUT_PIN
     sbi(PORTB, OUTPUT_PIN); // Set output pin to HIGH by default
                             // ESP needs a LOW pulse to reset
 
